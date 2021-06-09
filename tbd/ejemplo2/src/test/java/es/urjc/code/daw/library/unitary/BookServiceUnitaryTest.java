@@ -26,7 +26,7 @@ public class BookServiceUnitaryTest {
         
         repository = mock(BookRepository.class);
         notificationService = mock(NotificationService.class);
-        bookService = new BookService(repository, notificationService, new FF4j());
+        bookService = new BookService(repository, notificationService);
 			
     }
 

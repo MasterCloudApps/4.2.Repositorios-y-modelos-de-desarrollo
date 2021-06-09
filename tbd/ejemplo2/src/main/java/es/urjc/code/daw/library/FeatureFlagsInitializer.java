@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class FeatureFlagsInitializer {
 	
-	public static String FEATURE_FIND_BY_TITLE = "enableFindByTitle";
 	private FF4j ff4j;
 	
 	
@@ -18,9 +17,6 @@ public class FeatureFlagsInitializer {
 	
 	@PostConstruct
 	public void initializeFlags() {
-		if(!ff4j.exist(FEATURE_FIND_BY_TITLE)) {
-			ff4j.createFeature(FEATURE_FIND_BY_TITLE, false);
-		}
 	}
 
 }

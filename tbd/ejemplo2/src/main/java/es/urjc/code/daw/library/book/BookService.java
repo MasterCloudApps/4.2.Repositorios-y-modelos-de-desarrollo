@@ -18,12 +18,10 @@ public class BookService {
 
 	private BookRepository repository;
 	private NotificationService notificationService;
-	private FF4j ff4j;
 
-	public BookService(BookRepository repository, NotificationService notificationService, FF4j ff4j){
+	public BookService(BookRepository repository, NotificationService notificationService){
 		this.repository = repository;
 		this.notificationService = notificationService;
-		this.ff4j = ff4j;
 	}
 
 	public Optional<Book> findOne(long id) {
