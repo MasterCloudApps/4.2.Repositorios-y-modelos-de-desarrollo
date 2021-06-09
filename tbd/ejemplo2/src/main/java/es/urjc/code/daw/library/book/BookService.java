@@ -50,10 +50,6 @@ public class BookService {
 	}
 	
 	public List<Book> findByTitle(String title) {
-		if(ff4j.check(FEATURE_FIND_BY_TITLE)) {
-			return repository.findByTitle(title);
-		} else {
-			return Collections.EMPTY_LIST;
-		}
+		return repository.findByTitle(title);
 	}
 }

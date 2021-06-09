@@ -1,8 +1,10 @@
 package es.urjc.code.daw.library.rest;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Optional;
 
+import org.ff4j.FF4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import es.urjc.code.daw.library.book.Book;
 import es.urjc.code.daw.library.book.BookService;
+import static es.urjc.code.daw.library.FeatureFlagsInitializer.*;
 
 @RestController
 @RequestMapping("/api/books")
@@ -26,10 +29,22 @@ public class BookRestController {
 
 	@Autowired
 	private BookService service;
+	
+	@Autowired
+	private FF4j ff4j;
 
 	@GetMapping("/")
 	public Collection<Book> getBooks() {
 		return service.findAll();
+	}
+	
+	@GetMapping("/title/{title}")
+	public Collection<Book> getBooksByTitle(@PathVariable String title) {
+		if(ff4j.check(FEATURE_FIND_BY_TITLE)) {
+			return service.findByTitle(title);
+		} else {
+			return Collections.EMPTY_LIST;
+		}
 	}
 
 	@GetMapping("/{id}")
