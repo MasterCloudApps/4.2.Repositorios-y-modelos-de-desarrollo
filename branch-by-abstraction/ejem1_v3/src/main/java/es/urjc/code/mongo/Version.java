@@ -2,8 +2,6 @@ package es.urjc.code.mongo;
 
 import java.util.Date;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-
 public class Version {
 
     private String version;
