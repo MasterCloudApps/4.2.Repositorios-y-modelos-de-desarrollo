@@ -1,0 +1,16 @@
+{{>header}}
+		
+<div>
+  <h2>Book: <span id="bookTitle">{{book.title}}</span></h2>
+  <div>
+    <p id="bookDescription">{{book.description}}</p>
+  </div>
+  <p>
+		<button onclick="location.href='/removebook/{{book.id}}'">Remove</button>
+    <button onclick="location.href='/editbook/{{book.id}}'">Edit</button>
+    <br>
+    <button onclick="location.href='/'">All Books</button>
+  </p>
+  </div>		
+
+{{>footer}}

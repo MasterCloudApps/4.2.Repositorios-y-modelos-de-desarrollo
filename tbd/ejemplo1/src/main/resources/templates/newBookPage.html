@@ -1,0 +1,19 @@
+{{>header}}
+
+  <form action="/createbook" method="post">
+  <h2>New Book</h2>
+  <div>
+    <label>Title: </label>
+    <input name="title" placeholder="title"/>
+  </div>
+  <div>
+    <label>Abstract: </label>
+    <textarea name="description" placeholder="description"></textarea>
+  </div>
+  <p>
+    <button onclick="location.href='/'; return false;">Cancel</button>
+    <input type="submit" id="Save" value="Save"/>
+  </p>
+  </form>
+  
+{{>footer}}
