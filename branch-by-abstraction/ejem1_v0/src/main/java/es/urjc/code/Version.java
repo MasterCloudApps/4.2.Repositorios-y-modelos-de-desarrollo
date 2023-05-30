@@ -68,6 +68,6 @@ public class Version {
     @Override
     public String toString() {
         return  "version='" + version + '\'' +
-                ", fecha=" + fecha + ", producto=" + producto;
+                ", fecha=" + fecha + ", producto=" + producto.getDatos();
     }
 }

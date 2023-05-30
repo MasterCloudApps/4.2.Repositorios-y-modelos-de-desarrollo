@@ -3,8 +3,10 @@ package es.urjc.code.mongo;
 import java.util.Collections;
 import java.util.List;
 
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
+@Document
 public class Producto {
 
     @MongoId

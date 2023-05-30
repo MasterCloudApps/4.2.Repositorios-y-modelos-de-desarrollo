@@ -11,9 +11,7 @@ import org.springframework.stereotype.Controller;
 
 import es.urjc.code.service.ProductService;
 import es.urjc.code.sql.Producto;
-import es.urjc.code.sql.ProductoRepository;
 import es.urjc.code.sql.Version;
-import es.urjc.code.sql.VersionRepository;
 
 /**
  * Cargador de la BD y ejemplos de consulta.

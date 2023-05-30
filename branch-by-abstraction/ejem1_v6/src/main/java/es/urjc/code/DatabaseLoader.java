@@ -38,9 +38,13 @@ public class DatabaseLoader implements CommandLineRunner {
 
         repository.save(p1);
 
-
         // Recupera versiones
-        List<Version> versionesFromDb = repository.findAllVersions();
+        List<Version> versionesFromDb = repository
+            .findAll()
+            .stream()
+            .map(Producto::getVersiones)
+                .flatMap(List::stream)
+                .toList();;
         System.out.println("Versiones con findAll():");
         System.out.println("----------------------------------------");
         muestraDatos(versionesFromDb);

@@ -1,27 +1,30 @@
-package es.urjc.code.mongo;
+package es.urjc.code.service;
 
+import java.util.Collections;
 import java.util.List;
 
-import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
-@Document
-public class Producto {
+public class ProductoDto {
 
-    @MongoId
     private long id;
 
     // Por ejemplo, marca y modelo
     private String datos;
 
     // Historial de versiones
-    private List<Version> versiones;
+    private List<VersionDto> versiones;
 
-    public Producto() {
+    public ProductoDto() {
     }
 
-    public Producto(String datos) {
-        this.datos = datos;
+    public ProductoDto(String datos) {
+        this(datos, Collections.<VersionDto>emptyList());
+    }
+    
+    public ProductoDto(String datos, List<VersionDto> versiones) {
+    	this.datos = datos;
+    	this.versiones = versiones;
     }
 
     public long getId() {
@@ -40,11 +43,11 @@ public class Producto {
         this.datos = datos;
     }
 
-    public List<Version> getVersiones() {
+    public List<VersionDto> getVersiones() {
         return versiones;
     }
 
-    public void setVersiones(List<Version> versiones) {
+    public void setVersiones(List<VersionDto> versiones) {
         this.versiones = versiones;
     }
 
@@ -52,7 +55,7 @@ public class Producto {
     public String toString() {
 
         String strVersiones = "";
-        for (Version v : versiones) {
+        for (VersionDto v : versiones) {
             strVersiones += " [" + v.toString() + "] ";
         }
 

@@ -1,51 +1,54 @@
 package es.urjc.code.service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import es.urjc.code.sql.Producto;
-import es.urjc.code.sql.ProductoRepository;
-import es.urjc.code.sql.Version;
+import es.urjc.code.mongo.MongoProductoRepository;
+import es.urjc.code.mongo.Producto;
+import es.urjc.code.mongo.Version;
+import es.urjc.code.sql.JdbcProductoRepository;
 import es.urjc.code.sql.VersionRepository;
 
 @Component
 public class ProductService {
     
     @Autowired
-    ProductoRepository productoRepository;
+    JdbcProductoRepository jdbcProductoRepository;
 
     @Autowired
-    VersionRepository versionRepository;
+    VersionRepository jdbcVersionRepository;
 
     @Autowired
-    es.urjc.code.mongo.ProductoRepository mongoProductoRepository;
+    MongoProductoRepository mongoProductoRepository;
 
-    public List<Producto> findAllProducts() {
-        return productoRepository.findAll();
+    @Autowired
+    ModelMapper mapper;
+
+    public List<ProductoDto> findAllProducts() {
+        return jdbcProductoRepository
+            .findAll()
+            .stream()
+            .map(p -> mapper.map(p, ProductoDto.class))
+            .toList();
     }
 
-    public List<Version> findAllVersions() {
-        return versionRepository.findAll();
+    public List<VersionDto> findAllVersions() {
+        return jdbcVersionRepository
+            .findAll()
+            .stream()
+            .map(v -> mapper.map(v, VersionDto.class))
+            .toList();
     }
 
-    public void saveProduct(Producto p) {
-        productoRepository.save(p);
-        mongoProductoRepository.save(toMongoDocument(p));
+    public void saveProduct(ProductoDto p) {
+        // We save in both repositories (as per phase 3, commit 4)
+        jdbcProductoRepository.save(mapper.map(p, es.urjc.code.sql.Producto.class));
+        mongoProductoRepository.save(mapper.map(p, Producto.class));
     }
 
-    private es.urjc.code.mongo.Producto toMongoDocument(Producto p) {
-        return new es.urjc.code.mongo.Producto(p.getDatos(), toMongoVersiones(p.getVersiones()));
-    }
-
-    private List<es.urjc.code.mongo.Version> toMongoVersiones(List<Version> versiones) {
-        List<es.urjc.code.mongo.Version> mongoVersiones = new ArrayList<>();
-        for(Version v : versiones) {
-            mongoVersiones.add(new es.urjc.code.mongo.Version(v.getVersion(), v.getFecha()));
-        }
-        return mongoVersiones;
-    }
 }
 

@@ -1,22 +1,24 @@
-package es.urjc.code.mongo;
+package es.urjc.code.service;
 
 import java.util.Date;
 
-public class Version {
+import org.springframework.data.mongodb.core.mapping.Document;
+
+public class VersionDto {
 
     private String version;
     private Date fecha;
 
-    private Producto producto;
+    private ProductoDto producto;
 
-    public Version() {}
+    public VersionDto() {}
 
-    public Version(String version, Date fecha) {
+    public VersionDto(String version, Date fecha) {
         this.version = version;
         this.fecha = fecha;
     }
 
-    public Version(String version, Date fecha, Producto producto) {
+    public VersionDto(String version, Date fecha, ProductoDto producto) {
         this(version,fecha);
         this.producto = producto;
     }
@@ -37,11 +39,11 @@ public class Version {
         this.fecha = fecha;
     }
 
-    public Producto getProducto() {
+    public ProductoDto getProducto() {
         return producto;
     }
 
-    public void setProducto(Producto producto) {
+    public void setProducto(ProductoDto producto) {
         this.producto = producto;
     }
 

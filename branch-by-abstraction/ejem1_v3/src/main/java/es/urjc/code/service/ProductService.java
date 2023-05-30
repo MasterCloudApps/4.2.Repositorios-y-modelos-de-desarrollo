@@ -6,7 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import es.urjc.code.sql.Producto;
-import es.urjc.code.sql.ProductoRepository;
+   import es.urjc.code.mongo.MongoProductoRepository;
+import es.urjc.code.sql.JdbcProductoRepository;
 import es.urjc.code.sql.Version;
 import es.urjc.code.sql.VersionRepository;
 
@@ -14,13 +15,13 @@ import es.urjc.code.sql.VersionRepository;
 public class ProductService {
     
     @Autowired
-    ProductoRepository productoRepository;
+    JdbcProductoRepository productoRepository;
 
     @Autowired
     VersionRepository versionRepository;
     
     @Autowired
-    es.urjc.code.mongo.ProductoRepository mongoRepo;
+    MongoProductoRepository mongoRepo;
 
     public List<Producto> findAllProducts() {
         return productoRepository.findAll();

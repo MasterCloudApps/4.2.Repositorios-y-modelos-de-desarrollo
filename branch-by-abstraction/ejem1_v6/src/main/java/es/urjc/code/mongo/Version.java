@@ -2,14 +2,10 @@ package es.urjc.code.mongo;
 
 import java.util.Date;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-
 public class Version {
 
     private String version;
     private Date fecha;
-
-    private Producto producto;
 
     public Version() {}
 
@@ -20,7 +16,6 @@ public class Version {
 
     public Version(String version, Date fecha, Producto producto) {
         this(version,fecha);
-        this.producto = producto;
     }
 
     public String getVersion() {
@@ -39,18 +34,10 @@ public class Version {
         this.fecha = fecha;
     }
 
-    public Producto getProducto() {
-        return producto;
-    }
-
-    public void setProducto(Producto producto) {
-        this.producto = producto;
-    }
-
     @Override
     public String toString() {
         return  "version='" + version + '\'' +
-                ", fecha=" + fecha + ", producto=" + producto;
+                ", fecha=" + fecha;
     }
 
 }

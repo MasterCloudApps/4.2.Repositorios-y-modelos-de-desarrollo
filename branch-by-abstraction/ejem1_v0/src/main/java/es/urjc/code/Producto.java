@@ -18,8 +18,7 @@ public class Producto {
     private String datos;
 
     // Historial de versiones
-//    @OneToMany(cascade=CascadeType.ALL, mappedBy="producto", fetch = FetchType.EAGER)
-    @OneToMany(cascade=CascadeType.ALL, mappedBy="producto")
+    @OneToMany(cascade=CascadeType.ALL, mappedBy="producto", fetch = FetchType.EAGER)
     private List<Version> versiones;
 
     public Producto() {
